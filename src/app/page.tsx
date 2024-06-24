@@ -14,9 +14,9 @@ const poppins = Poppins({
 
 export default function Home() {
   const phaseList: Phases = [
-    { name: "info_market", minute: 3, message: "찌라시 정보 경매시간입니다" },
-    { name: "pre_market", minute: 5, message: "장외 거래 시간입니다" },
-    { name: "main_market", minute: 5, message: "메인 거래 시간입니다" }
+    { name: "info_market", minute: 2, message: "찌라시 정보 경매시간입니다" },
+    { name: "main_market", minute: 5, message: "메인 장중 거래 시간입니다" },
+    { name: "post_market", minute: 3, message: "장외 거래 시간입니다" }
   ];
 
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -26,6 +26,7 @@ export default function Home() {
   const [startTimer, setStartTimer] = useState(false);
   const [visible, setVisible] = useState(false);
   const [endGame, setEndGame] = useState(false);
+  const [startGame, setStartGame] = useState(false);
 
   const ticking = () => {
     if (minutes == 0 && seconds == 0) {
@@ -42,7 +43,7 @@ export default function Home() {
       setVisible(false);
     } else if (seconds == 0) {
       setMinutes((minutes) => minutes - 1);
-      setSeconds(3);
+      setSeconds(59);
     } else {
       setSeconds((seconds) => seconds - 1);
     }
@@ -50,6 +51,7 @@ export default function Home() {
 
   const startButtonAction = () => {
     setVisible(true);
+    setStartGame(true);
     if (startTimer) {
       setStartTimer(false);
     } else {
@@ -59,7 +61,7 @@ export default function Home() {
 
   const skipButtonAction = () => {
     if (round == 4) {
-
+      setEndGame(true);
     }
     const index = phaseIndex == 2 ? 0 : phaseIndex + 1
     setPhaseIndex(index);
@@ -67,8 +69,10 @@ export default function Home() {
       setRound((round) => round + 1);
     }
     setMinutes(phaseList[index].minute);
+    setSeconds(0);
     setStartTimer(false);
     setVisible(false);
+    setStartGame(true);
   }
 
   useEffect(() => {
@@ -108,7 +112,19 @@ export default function Home() {
           테크본부<br/>타운홀
         </h1>
       </div>
-      <Timer phase={ phaseList[phaseIndex] } round={round} minutes={minutes} seconds={seconds} visible={visible}/>
+      {startGame ? endGame ? <h1 className="leading-normal mb-10 text-center text-7xl font-bold select-none m-0 text-red-500">
+          모든 거래가 종료되었습니다 
+          <br/>
+          최종 우승팀을 가려주세요
+        </h1> : 
+       <Timer phase={ phaseList[phaseIndex] } round={round} minutes={minutes} seconds={seconds} visible={visible}/> 
+       : <h1 className="mb-10 text-center text-9xl font-bold select-none m-0 text-red-500">
+          Townhall 
+          <br/>
+          Stock Market
+        </h1>
+      }
+      
       <div className="flex flex justify-center items-center relative z-10">
         <button className="mr-5 px-16 py-2 font-bold text-2xl rounded-md bg-yellow-500 text-black" onClick={startButtonAction}>
           {startTimer ? "Pause" : "Start"}
