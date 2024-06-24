@@ -21,7 +21,7 @@ export default function Home() {
 
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(3);
+  const [minutes, setMinutes] = useState(2);
   const [round, setRound] = useState(1);
   const [startTimer, setStartTimer] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -31,7 +31,7 @@ export default function Home() {
   const ticking = () => {
     if (minutes == 0 && seconds == 0) {
       if (round == 4) {
-
+        setEndGame(true);
       }
       const index = phaseIndex == 2 ? 0 : phaseIndex + 1
       setPhaseIndex(index);
