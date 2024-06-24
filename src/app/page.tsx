@@ -48,7 +48,7 @@ export default function Home() {
     }
   }
 
-  const buttonAction = () => {
+  const startButtonAction = () => {
     setVisible(true);
     if (startTimer) {
       setStartTimer(false);
@@ -110,7 +110,7 @@ export default function Home() {
       </div>
       <Timer phase={ phaseList[phaseIndex] } round={round} minutes={minutes} seconds={seconds} visible={visible}/>
       <div className="flex flex justify-center items-center relative z-10">
-        <button className="mr-5 px-16 py-2 font-bold text-2xl rounded-md bg-yellow-500 text-black" onClick={buttonAction}>
+        <button className="mr-5 px-16 py-2 font-bold text-2xl rounded-md bg-yellow-500 text-black" onClick={startButtonAction}>
           {startTimer ? "Pause" : "Start"}
         </button>
         <button className="px-16 py-2 font-bold text-2xl rounded-md bg-yellow-500 text-black" onClick={skipButtonAction}>
