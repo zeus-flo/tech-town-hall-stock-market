@@ -30,7 +30,7 @@ export default function Home() {
 
   const ticking = () => {
     if (minutes == 0 && seconds == 0) {
-      if (round == 4) {
+      if (round == 4 && phaseIndex == 2) {
         setEndGame(true);
       }
       const index = phaseIndex == 2 ? 0 : phaseIndex + 1
@@ -60,7 +60,7 @@ export default function Home() {
   }
 
   const skipButtonAction = () => {
-    if (round == 4) {
+    if (round == 4 && phaseIndex == 2) {
       setEndGame(true);
     }
     const index = phaseIndex == 2 ? 0 : phaseIndex + 1
