@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export default function Home() {
   const phaseList: Phases = [
-    { name: "info_market", minute: 2, message: "찌라시 정보 경매시간입니다" },
+    { name: "info_market", minute: 2, message: "찌라시 판매 시간입니다" },
     { name: "main_market", minute: 5, message: "메인 장중 거래 시간입니다" },
     { name: "post_market", minute: 3, message: "장외 거래 시간입니다" }
   ];
